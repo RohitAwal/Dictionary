@@ -1,5 +1,6 @@
 package com.e.dictionary;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,12 +37,17 @@ public class MainActivity extends AppCompatActivity {
                 new ArrayList<String>(dictionary.keySet())
         );
         lstCountries.setAdapter(countryAdapter);
+
+
+
         lstCountries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String country = parent.getItemAtPosition(position).toString();
-                String captial = dictionary.get(country);
-                Toast.makeText(getApplicationContext(),captial.toString(),Toast.LENGTH_LONG).show();
+                String capital = dictionary.get(country);
+                Intent intent = new Intent(MainActivity.this,CaptitalActivity.class);
+                intent.putExtra("meaning",capital);
+                startActivity(intent);
             }
         });
     }
